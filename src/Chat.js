@@ -16,7 +16,12 @@ import MessageBox from "./MessageBox";
 
 // Use for remote connections
 const configuration = {
-  iceServers: [{ url: "stun:stun.1.google.com:19302" }]
+  iceServers: [
+    {"urls": "stun:openrelay.metered.ca:80"},
+    {"urls": ["turn:openrelay.metered.ca:80"], "username": "openrelayproject", "credential": "openrelayproject"},
+    {"urls": ["turn:openrelay.metered.ca:443"], "username": "openrelayproject", "credential": "openrelayproject"},
+    {"urls": ["turn:openrelay.metered.ca:443?transport=tcp"], "username": "openrelayproject", "credential": "openrelayproject"}               
+  ]
 };
 
 // Use for local connections
@@ -39,7 +44,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
-    webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL || "wss://mutehost.loria.fr:8018");
     webSocket.current.onmessage = message => {
       const data = JSON.parse(message.data);
       setSocketMessages(prev => [...prev, data]);
@@ -300,7 +305,8 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
       {alert}
       <Header as="h2" icon>
         <Icon name="users" />
-        Simple WebRTC Chap App
+        Simple WebRTC Chap app
+        (Using turn servers)
       </Header>
       {(socketOpen && (
         <Fragment>
