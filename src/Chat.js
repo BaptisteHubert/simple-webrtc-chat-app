@@ -16,12 +16,7 @@ import MessageBox from "./MessageBox";
 
 // Use for remote connections
 const configuration = {
-  iceServers: [
-    {"urls": "stun:openrelay.metered.ca:80"},
-    {"urls": ["turn:openrelay.metered.ca:80"], "username": "openrelayproject", "credential": "openrelayproject"},
-    {"urls": ["turn:openrelay.metered.ca:443"], "username": "openrelayproject", "credential": "openrelayproject"},
-    {"urls": ["turn:openrelay.metered.ca:443?transport=tcp"], "username": "openrelayproject", "credential": "openrelayproject"}               
-  ]
+  iceServers: [{ url: "stun:stun.1.google.com:19302" }]
 };
 
 // Use for local connections
@@ -306,7 +301,7 @@ const Chat = ({ connection, updateConnection, channel, updateChannel }) => {
       <Header as="h2" icon>
         <Icon name="users" />
         Simple WebRTC Chap app
-        (Using turn servers)
+        (Not using TURN servers)
       </Header>
       {(socketOpen && (
         <Fragment>

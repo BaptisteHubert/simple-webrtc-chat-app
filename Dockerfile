@@ -13,6 +13,6 @@ RUN npm install -g angular-http-server
 
 COPY build/ /usr/app/
 
-EXPOSE 8021
+EXPOSE 8009
 
-CMD ["angular-http-server", "-p", "8021"]
+CMD ["angular-http-server", "-p", "8009"]
