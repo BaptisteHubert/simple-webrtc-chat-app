@@ -16,7 +16,9 @@ import MessageBox from "./MessageBox";
 
 // Use for remote connections
 const configuration = {
-  iceServers: [{ url: "stun:stun.1.google.com:19302" }]
+  iceServers: [
+    {"urls": "stun:openrelay.metered.ca:80"}
+  ]
 };
 
 // Use for local connections
